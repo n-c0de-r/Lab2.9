@@ -14,15 +14,14 @@ public class CalcEngineString {
 	}
 
 	/**
-	 * @return The value that should currently be displayed on the calculator
-	 *         display.
+	 * @return The string that should be calculated by postfix.
 	 */
 	public String getDisplayString() {
 		return displayString;
 	}
 
 	/**
-	 * Calculate the dec / hex output
+	 * Extend the string to evaluate
 	 * 
 	 * @param number The number pressed on the calculator.
 	 */
@@ -31,13 +30,18 @@ public class CalcEngineString {
 		displayString += " ";
 	}
 
+	/**
+	 * Calculate the dec / hex output
+	 * 
+	 * @param mode The base mode to parse to.
+	 */
 	public void equals(int mode) {
 		if (displayString != null) {
 			String pfx = postfix.infixToPostfix(displayString);
 			if (mode == 10) {
 				displayString = "" + postfix.evaluate(pfx);
 			} else {
-				// Cast Doubles to integer, as hex cant calculate doubles anyways!
+				// Cast Doubles to integer, as hex can't calculate doubles anyways!
 				displayString = "" + Integer.toHexString((int) (postfix.evaluate(pfx)));
 			}
 		}
